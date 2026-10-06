@@ -233,6 +233,10 @@ function startGame(kind = 'level', arg) {
   S.mode = 'basic';
   S.sessionSigs = new Set();
   S.dial = createDial(); S.pace = new PaceMeter();
+  // A retry from the midway page comes straight from a run that may have
+  // stopped mid-problem or mid-pause: clear that, or the frame loop never
+  // serves the first problem after the intro.
+  Object.assign(S, { problem: null, ready: false, shownWrong: null, pausedAt: null, pausedTotal: 0 });
   Object.assign(S, { chill: 0, chillBy: {}, paceRun: 0, chillSeen: chillTotal(), notes: [], sessionTimes: {}, newUnlocks: [], newMastered: [], newStars: {}, polished: [], wrongList: [], restMs: 0, rested: false, okawari: null, problemCount: 0, joinMusic: null });
   renderRack();
   S.look = col.pickLook(equipState(), chillTotal(), S.rng);
