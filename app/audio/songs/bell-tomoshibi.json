@@ -1,0 +1,403 @@
+{
+ "id": "bell-tomoshibi",
+ "title": "ともしびの ベル",
+ "bpm": 70,
+ "swing": 0.1,
+ "key": "C",
+ "seed": 3307,
+ "note": "ふゆの ベル の変奏。ハ長調で、まどの あかりの あたたかさ。",
+ "targetSec": 240,
+ "loopFrom": 1,
+ "form": [
+  "intro",
+  "A",
+  "A",
+  "B",
+  "A",
+  "C",
+  "B",
+  "A",
+  "A"
+ ],
+ "layers": [
+  {
+   "track": "pad",
+   "at": 0
+  },
+  {
+   "track": "keys",
+   "at": 0
+  },
+  {
+   "track": "drums",
+   "at": 0.18
+  },
+  {
+   "track": "bass",
+   "at": 0.32
+  },
+  {
+   "track": "lead",
+   "at": 0.48
+  },
+  {
+   "track": "counter",
+   "at": 0.68
+  }
+ ],
+ "sections": {
+  "intro": {
+   "bars": 2,
+   "chords": [
+    "Fmaj9",
+    "G9sus4"
+   ],
+   "breath": true
+  },
+  "A": {
+   "bars": 8,
+   "chords": [
+    "Cmaj9",
+    "Am9",
+    "Fmaj9",
+    "G9sus4 G9",
+    "Em7 A7b9",
+    "Dm9",
+    "Fm6 Bb9",
+    "Dm9 G9sus4"
+   ],
+   "melody": "a"
+  },
+  "B": {
+   "bars": 8,
+   "chords": [
+    "Fmaj9",
+    "G/F",
+    "Em7",
+    "Am9",
+    "Dm9",
+    "G9",
+    "Cmaj9",
+    "G9sus4"
+   ],
+   "melody": "b"
+  },
+  "C": {
+   "bars": 8,
+   "chords": [
+    "Cmaj9",
+    "Am9",
+    "Fmaj9",
+    "G9sus4 G9",
+    "Em7 A7b9",
+    "Dm9",
+    "Fm6 Bb9",
+    "Dm9 G9sus4"
+   ]
+  },
+  "O": {
+   "bars": 4,
+   "chords": [
+    "Cmaj9",
+    "Fmaj9",
+    "Cmaj9",
+    "Fmaj9"
+   ],
+   "loop": true
+  }
+ },
+ "melodies": {
+  "a": [
+   [
+    0,
+    0,
+    8,
+    12
+   ],
+   [
+    0,
+    8,
+    8,
+    16
+   ],
+   [
+    1,
+    0,
+    4,
+    17
+   ],
+   [
+    1,
+    4,
+    4,
+    21
+   ],
+   [
+    1,
+    8,
+    8,
+    16
+   ],
+   [
+    2,
+    0,
+    4,
+    17
+   ],
+   [
+    2,
+    4,
+    12,
+    21
+   ],
+   [
+    3,
+    0,
+    8,
+    19
+   ],
+   [
+    3,
+    8,
+    4,
+    16
+   ],
+   [
+    3,
+    12,
+    4,
+    14
+   ],
+   [
+    4,
+    0,
+    8,
+    19
+   ],
+   [
+    4,
+    8,
+    8,
+    18
+   ],
+   [
+    5,
+    0,
+    16,
+    21
+   ],
+   [
+    6,
+    0,
+    4,
+    19
+   ],
+   [
+    6,
+    4,
+    4,
+    22
+   ],
+   [
+    6,
+    8,
+    8,
+    19
+   ],
+   [
+    7,
+    0,
+    16,
+    10
+   ]
+  ],
+  "b": [
+   [
+    0,
+    0,
+    4,
+    22
+   ],
+   [
+    0,
+    4,
+    4,
+    21
+   ],
+   [
+    0,
+    8,
+    8,
+    17
+   ],
+   [
+    1,
+    0,
+    8,
+    16
+   ],
+   [
+    1,
+    8,
+    4,
+    19
+   ],
+   [
+    1,
+    12,
+    4,
+    16
+   ],
+   [
+    2,
+    0,
+    8,
+    21
+   ],
+   [
+    2,
+    8,
+    8,
+    19
+   ],
+   [
+    3,
+    4,
+    4,
+    16
+   ],
+   [
+    3,
+    8,
+    8,
+    17
+   ],
+   [
+    4,
+    0,
+    4,
+    21
+   ],
+   [
+    4,
+    4,
+    4,
+    22
+   ],
+   [
+    4,
+    8,
+    8,
+    19
+   ],
+   [
+    5,
+    0,
+    12,
+    16
+   ],
+   [
+    5,
+    12,
+    4,
+    22
+   ],
+   [
+    6,
+    0,
+    8,
+    19
+   ],
+   [
+    6,
+    8,
+    8,
+    16
+   ],
+   [
+    7,
+    0,
+    16,
+    12
+   ]
+  ]
+ },
+ "lead": {
+  "base": 67,
+  "octaveOnRepeat": false
+ },
+ "keys": {
+  "center": 62
+ },
+ "bass": {
+  "low": 36
+ },
+ "tracks": {
+  "keys": {
+   "inst": "piano",
+   "gain": 0.291,
+   "pan": -0.15,
+   "send": 0.35,
+   "params": {
+    "bright": 0.35
+   }
+  },
+  "lead": {
+   "inst": "celesta",
+   "gain": 0.387,
+   "pan": 0.15,
+   "send": 0.45,
+   "params": {}
+  },
+  "bass": {
+   "inst": "subbass",
+   "gain": 0.374,
+   "pan": 0,
+   "send": 0,
+   "params": {
+    "bright": 0.5
+   }
+  },
+  "counter": {
+   "inst": "kalimba",
+   "gain": 0.25,
+   "pan": 0.35,
+   "send": 0.45,
+   "params": {}
+  },
+  "drums": {
+   "gain": 0.782,
+   "send": 0.12,
+   "tone": 0.3
+  },
+  "pad": {
+   "gain": 0.241,
+   "cutoff": 1200
+  }
+ },
+ "styles": {
+  "drums": "soft",
+  "bass": "hold",
+  "keys": "lofi",
+  "counter": "chime"
+ },
+ "fx": {
+  "wow": 0.25,
+  "flutter": 0.15,
+  "crackle": 0.4,
+  "lpf": 4400,
+  "sat": 0.15,
+  "reverb": 0.45
+ },
+ "bside": {
+  "transpose": 2,
+  "styles": {
+   "keys": "arp",
+   "counter": "arp16"
+  },
+  "melodyOctave": -12
+ },
+ "input": {
+  "inst": "celesta"
+ }
+}

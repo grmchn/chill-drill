@@ -1,0 +1,397 @@
+{
+ "id": "winter-bell",
+ "title": "ふゆの ベル",
+ "bpm": 70,
+ "swing": 0.08,
+ "key": "G",
+ "seed": 1125,
+ "note": "チェレスタとピアノ。冬の朝の、白い光。",
+ "targetSec": 240,
+ "loopFrom": 1,
+ "form": [
+  "intro",
+  "A",
+  "A",
+  "B",
+  "A",
+  "C",
+  "B",
+  "A",
+  "A"
+ ],
+ "layers": [
+  {
+   "track": "pad",
+   "at": 0
+  },
+  {
+   "track": "keys",
+   "at": 0
+  },
+  {
+   "track": "drums",
+   "at": 0.18
+  },
+  {
+   "track": "bass",
+   "at": 0.32
+  },
+  {
+   "track": "lead",
+   "at": 0.48
+  },
+  {
+   "track": "counter",
+   "at": 0.68
+  }
+ ],
+ "sections": {
+  "intro": {
+   "bars": 2,
+   "chords": [
+    "Cmaj9",
+    "D9sus4"
+   ],
+   "breath": true
+  },
+  "A": {
+   "bars": 8,
+   "chords": [
+    "Gmaj9",
+    "Em9",
+    "Cmaj9",
+    "D9sus4 D9",
+    "Gmaj9",
+    "Bm7",
+    "Cmaj9",
+    "Am9 D9"
+   ],
+   "melody": "a"
+  },
+  "B": {
+   "bars": 8,
+   "chords": [
+    "Cmaj9",
+    "Bm7",
+    "Am9",
+    "Gmaj9",
+    "Cmaj9",
+    "Cm6",
+    "Bm7",
+    "Am9 D9sus4"
+   ],
+   "melody": "b"
+  },
+  "C": {
+   "bars": 8,
+   "chords": [
+    "Gmaj9",
+    "Em9",
+    "Cmaj9",
+    "D9sus4 D9",
+    "Gmaj9",
+    "Bm7",
+    "Cmaj9",
+    "Am9 D9"
+   ]
+  },
+  "O": {
+   "bars": 4,
+   "chords": [
+    "Gmaj9",
+    "Cmaj9",
+    "Gmaj9",
+    "Cmaj9"
+   ],
+   "loop": true
+  }
+ },
+ "melodies": {
+  "a": [
+   [
+    0,
+    0,
+    4,
+    16
+   ],
+   [
+    0,
+    4,
+    4,
+    14
+   ],
+   [
+    0,
+    8,
+    8,
+    19
+   ],
+   [
+    1,
+    0,
+    8,
+    23
+   ],
+   [
+    1,
+    8,
+    8,
+    19
+   ],
+   [
+    2,
+    0,
+    4,
+    16
+   ],
+   [
+    2,
+    4,
+    4,
+    19
+   ],
+   [
+    2,
+    8,
+    8,
+    21
+   ],
+   [
+    3,
+    0,
+    8,
+    12
+   ],
+   [
+    3,
+    8,
+    8,
+    11
+   ],
+   [
+    4,
+    0,
+    4,
+    14
+   ],
+   [
+    4,
+    4,
+    4,
+    16
+   ],
+   [
+    4,
+    8,
+    8,
+    23
+   ],
+   [
+    5,
+    0,
+    8,
+    19
+   ],
+   [
+    5,
+    8,
+    8,
+    14
+   ],
+   [
+    6,
+    0,
+    12,
+    16
+   ],
+   [
+    6,
+    12,
+    4,
+    12
+   ],
+   [
+    7,
+    0,
+    8,
+    14
+   ],
+   [
+    7,
+    8,
+    8,
+    11
+   ]
+  ],
+  "b": [
+   [
+    0,
+    0,
+    8,
+    21
+   ],
+   [
+    0,
+    8,
+    8,
+    19
+   ],
+   [
+    1,
+    0,
+    8,
+    23
+   ],
+   [
+    1,
+    8,
+    8,
+    19
+   ],
+   [
+    2,
+    0,
+    8,
+    17
+   ],
+   [
+    2,
+    8,
+    8,
+    16
+   ],
+   [
+    3,
+    0,
+    16,
+    14
+   ],
+   [
+    4,
+    0,
+    4,
+    16
+   ],
+   [
+    4,
+    4,
+    4,
+    19
+   ],
+   [
+    4,
+    8,
+    8,
+    24
+   ],
+   [
+    5,
+    0,
+    8,
+    20
+   ],
+   [
+    5,
+    8,
+    8,
+    17
+   ],
+   [
+    6,
+    0,
+    12,
+    16
+   ],
+   [
+    6,
+    12,
+    4,
+    14
+   ],
+   [
+    7,
+    0,
+    16,
+    12
+   ]
+  ]
+ },
+ "lead": {
+  "base": 67,
+  "octaveOnRepeat": false
+ },
+ "keys": {
+  "center": 62
+ },
+ "bass": {
+  "low": 36
+ },
+ "tracks": {
+  "keys": {
+   "inst": "piano",
+   "gain": 0.291,
+   "pan": -0.15,
+   "send": 0.35,
+   "params": {
+    "bright": 0.35
+   }
+  },
+  "lead": {
+   "inst": "celesta",
+   "gain": 0.387,
+   "pan": 0.15,
+   "send": 0.45,
+   "params": {}
+  },
+  "bass": {
+   "inst": "subbass",
+   "gain": 0.374,
+   "pan": 0,
+   "send": 0,
+   "params": {
+    "bright": 0.5
+   }
+  },
+  "counter": {
+   "inst": "kalimba",
+   "gain": 0.359,
+   "pan": 0.35,
+   "send": 0.45,
+   "params": {}
+  },
+  "drums": {
+   "gain": 0.782,
+   "send": 0.12,
+   "tone": 0.3
+  },
+  "pad": {
+   "gain": 0.241,
+   "cutoff": 1200
+  }
+ },
+ "styles": {
+  "drums": "soft",
+  "bass": "hold",
+  "keys": "lofi",
+  "counter": "chime"
+ },
+ "fx": {
+  "wow": 0.25,
+  "flutter": 0.15,
+  "crackle": 0.4,
+  "lpf": 4400,
+  "sat": 0.15,
+  "reverb": 0.45
+ },
+ "bside": {
+  "transpose": -2,
+  "styles": {
+   "keys": "arp",
+   "counter": "arp16"
+  },
+  "melodyOctave": -12
+ },
+ "input": {
+  "inst": "celesta"
+ }
+}

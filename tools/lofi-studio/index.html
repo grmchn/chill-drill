@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lo-Fi Studio — チルドリル</title>
+  <link rel="stylesheet" href="studio.css">
+  <script type="module" src="studio.js"></script>
+</head>
+<body>
+  <header class="top">
+    <h1>Lo-Fi Studio <small>チルドリルの作曲・音作り</small></h1>
+    <div class="row">
+      <label>曲 <select id="song-pick"></select></label>
+      <button id="new-song" type="button">新しい曲</button>
+      <label class="file">読み込み <input id="import" type="file" accept=".json,application/json"></label>
+      <button id="export" type="button">JSONを書き出す</button>
+      <button id="copy" type="button">JSONをコピー</button>
+      <button id="render" type="button">WAVで書き出す</button>
+      <label>長さ <select id="render-len"><option value="30">30秒</option><option value="60">60秒</option><option value="full">1曲</option></select></label>
+      <span id="status" class="status" role="status"></span>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="panel transport" aria-labelledby="h-transport">
+      <h2 id="h-transport">再生</h2>
+      <div class="row">
+        <button id="play" type="button" class="primary">▶ A面</button>
+        <button id="play-b" type="button">▶ B面</button>
+        <button id="finish" type="button">締める</button>
+        <button id="stop" type="button">■ 止める</button>
+      </div>
+      <label class="slider">エネルギー（層） <input id="energy" type="range" min="0" max="1" step="0.01" value="1"><output id="energy-v">1.00</output></label>
+      <label class="slider">マイペース（こもりがほどける） <input id="flow" type="range" min="0" max="1" step="0.01" value="0"><output id="flow-v">0.00</output></label>
+      <p class="pos" id="pos">—</p>
+      <p class="hint">エネルギーは層（pad・keys → drums → bass → lead → counter）を決める。ゲームではセッションの進み具合で上がる。</p>
+      <h3>入力音の試し</h3>
+      <div class="row" id="sfx-row">
+        <button data-sfx="key" type="button">キー</button><button data-sfx="write" type="button">鉛筆</button><button data-sfx="erase" type="button">消しゴム</button>
+        <button data-sfx="check" type="button">チェック</button><button data-sfx="maru" type="button">丸つけ</button><button data-sfx="wrong" type="button">誤答</button>
+        <button data-sfx="notify" type="button">通知</button><button data-sfx="lantern" type="button">灯り</button><button data-sfx="chime" type="button">休憩</button><button data-sfx="breath" type="button">深呼吸</button>
+      </div>
+      <label>環境音 <select id="ambient"><option value="none">なし</option><option value="rain">雨</option><option value="fire">焚き火</option><option value="cafe">カフェ</option><option value="insects">虫の声</option></select></label>
+    </section>
+
+    <section class="panel song" aria-labelledby="h-song">
+      <h2 id="h-song">曲の設定</h2>
+      <div class="fields">
+        <label>ID <input id="f-id" type="text"></label>
+        <label>題名 <input id="f-title" type="text"></label>
+        <label>BPM <input id="f-bpm" type="number" min="60" max="100" step="1"></label>
+        <label>スウィング <input id="f-swing" type="number" min="0" max="0.4" step="0.01"></label>
+        <label>調（メモ） <input id="f-key" type="text"></label>
+        <label>旋律の基準音（MIDI） <input id="f-leadbase" type="number" min="48" max="84"></label>
+        <label>入力音の楽器 <select id="f-input"></select></label>
+        <label>長さの目安（秒） <input id="f-target" type="number" min="60" max="600" step="10"></label>
+      </div>
+      <h3>スタイル</h3>
+      <div class="fields" id="styles"></div>
+      <h3>構成（form）</h3>
+      <input id="f-form" type="text" class="wide" aria-describedby="form-hint">
+      <p class="hint" id="form-hint">セクション名をスペース区切りで。intro は深呼吸用。最後に O（アウトロ）が自動で付き、待つ間はループする。</p>
+      <p class="hint" id="validate"></p>
+    </section>
+
+    <section class="panel mixer" aria-labelledby="h-mixer">
+      <h2 id="h-mixer">ミックスと質感</h2>
+      <table class="mix"><thead><tr><th>トラック</th><th>音量</th><th>定位</th><th>残響</th><th>M</th><th>S</th></tr></thead><tbody id="mix-rows"></tbody></table>
+      <h3>質感（テープ・レコード）</h3>
+      <div id="fx-rows"></div>
+    </section>
+
+    <section class="panel inst" aria-labelledby="h-inst">
+      <h2 id="h-inst">音色</h2>
+      <div class="row">
+        <label>トラック <select id="inst-track"></select></label>
+        <label>楽器 <select id="inst-kind"></select></label>
+      </div>
+      <div id="inst-params"></div>
+      <div class="keyboard" id="keyboard" aria-label="試し弾き"></div>
+    </section>
+
+    <section class="panel chords" aria-labelledby="h-chords">
+      <h2 id="h-chords">コード進行</h2>
+      <div class="row"><label>セクション <select id="sec-pick"></select></label><button id="sec-add" type="button">セクションを追加</button></div>
+      <div class="fields">
+        <label>小節数 <input id="sec-bars" type="number" min="1" max="16"></label>
+        <label>旋律 <select id="sec-melody"></select></label>
+        <label class="check"><input id="sec-breath" type="checkbox"> 深呼吸（ドラム・ベースなし）</label>
+      </div>
+      <div class="chord-cells" id="chord-cells"></div>
+      <p class="hint">1小節に2つ書くと半分ずつ（例：Em7b5 A7b9）。使える型：maj7 maj9 6 69 add9 m7 m9 m11 m6 mmaj7 7 9 13 7b9 7#9 7b13 7sus4 9sus4 13sus4 sus4 m7b5 dim7、分数コード（C/Bb）。</p>
+    </section>
+
+    <section class="panel roll" aria-labelledby="h-roll">
+      <h2 id="h-roll">旋律（ピアノロール）</h2>
+      <div class="row">
+        <label>旋律 <select id="mel-pick"></select></label>
+        <button id="mel-new" type="button">旋律を追加</button>
+        <label>長さ <select id="mel-len"><option value="1">16分</option><option value="2" selected>8分</option><option value="4">4分</option><option value="8">2分</option><option value="16">全</option></select></label>
+        <button id="mel-play" type="button">この旋律を聞く</button>
+      </div>
+      <p class="hint">クリックで追加、もう一度クリックで削除。行の色はそのときのコードの構成音。</p>
+      <div class="roll-wrap"><canvas id="roll" width="1280" height="420" aria-label="ピアノロール"></canvas></div>
+    </section>
+  </main>
+</body>
+</html>

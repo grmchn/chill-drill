@@ -1,0 +1,23 @@
+# Development-only material is kept in the private development repository.
+outputs/
+inputs/
+issues/
+specs/
+AGENTS.md
+CLAUDE.md
+
+# Local state, builds and caches
+node_modules/
+dist/
+var/
+.wrangler/
+.venv/
+__pycache__/
+tests/scratch/
+*.wav
+*.mp3
+*.mp4
+.DS_Store
+*.log
+.env
+.env.*

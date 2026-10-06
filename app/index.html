@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2A2D5E">
+  <meta name="description" content="Lo-Fiを流しながら、チルネコと並んで静かに続ける算数ドリル。">
+  <title>チルドリル</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body class="screen-title-on">
+  <div id="room" class="room" aria-hidden="true"></div>
+  <div class="breath-glow" id="breath-glow" aria-hidden="true"></div>
+  <div id="grain" class="grain" aria-hidden="true"></div>
+
+  <main id="app">
+    <!-- Top bar: tape progress (play), sound, stop, settings -->
+    <header class="bar" id="bar">
+      <div class="tape" id="tape" role="progressbar" aria-label="きょくの すすみぐあい" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <svg viewBox="0 0 120 50"><rect x="2" y="4" width="116" height="42" rx="7" class="tape-body"/><rect x="14" y="37" width="92" height="5" rx="2.5" class="tape-track"/><rect x="14" y="37" width="0" height="5" rx="2.5" class="tape-fill" id="tape-fill"/><rect x="18" y="13" width="84" height="20" rx="10" class="tape-window"/><g class="reel" id="reel-l"><circle cx="38" cy="23" r="7"/><path d="M38 16 L38 30 M31 23 L45 23"/></g><g class="reel" id="reel-r"><circle cx="82" cy="23" r="7"/><path d="M82 16 L82 30 M75 23 L89 23"/></g><circle cx="38" cy="23" r="9" class="spool" id="spool-l"/><circle cx="82" cy="23" r="9" class="spool" id="spool-r"/></svg>
+      </div>
+      <div class="tape-rack" id="tape-rack" role="img" hidden></div>
+      <span class="clock" id="clock" hidden></span>
+      <span class="chill-chip" id="chill-chip" aria-label="きょうの チル">0チル</span>
+      <span class="demo-chip" id="demo-chip" hidden>じどう プレイちゅう・タップで おわる</span>
+      <span class="spacer"></span>
+      <button type="button" class="icon-btn" id="mute" aria-label="音を けす" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 H8 L13 5 V19 L8 15 H4 Z" class="ico"/><path d="M16 9 Q18.5 12 16 15 M18.5 7 Q22.5 12 18.5 17" class="ico-line on"/><path d="M16.5 9.5 L21.5 14.5 M21.5 9.5 L16.5 14.5" class="ico-line off"/></svg></button>
+      <button type="button" class="icon-btn" id="open-settings" aria-label="せってい" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2" class="ico-line"/><path d="M12 3 V6 M12 18 V21 M3 12 H6 M18 12 H21 M5.6 5.6 L7.8 7.8 M16.2 16.2 L18.4 18.4 M5.6 18.4 L7.8 16.2 M16.2 7.8 L18.4 5.6" class="ico-line"/></svg></button>
+      <button type="button" class="icon-btn" id="open-guide" aria-label="あそびかた" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 9 C8.5 6.5 10 5 12 5 C14 5 15.5 6.5 15.5 8.5 C15.5 11 12 11.5 12 14 M12 18 V18.2" class="ico-line"/></svg></button>
+      <button type="button" class="stop-btn" id="stop" hidden>ここまで</button>
+    </header>
+
+    <div class="stage" id="stage">
+      <div id="neko-host" class="neko-host" aria-hidden="true"></div>
+
+      <!-- Title: the cover of the notebook -->
+      <section id="screen-title" class="screen is-active" aria-labelledby="logo">
+        <div class="cover paper">
+          <h1 id="logo" class="logo" aria-label="チルドリル いやしの さんすう ドリル"><svg class="logo-mark" viewBox="0 0 360 132" aria-hidden="true">
+            <g class="logo-sky"><path class="logo-moon" d="M190 8 C178 10 171 21 173 32 C175 43 186 50 197 48 C190 45 185 38 185 29 C185 20 189 12 196 9 C194 8 192 8 190 8 Z"/><path class="logo-star" d="M146 22 L148.5 28.5 L155 31 L148.5 33.5 L146 40 L143.5 33.5 L137 31 L143.5 28.5 Z"/><path class="logo-star s2" d="M224 18 L225.6 22.4 L230 24 L225.6 25.6 L224 30 L222.4 25.6 L218 24 L222.4 22.4 Z"/><path class="logo-star s3" d="M214 44 L215 46.8 L218 48 L215 49.2 L214 52 L213 49.2 L210 48 L213 46.8 Z"/></g>
+            <text class="logo-word" x="180" y="116" text-anchor="middle" rotate="-5 3 -3 4 -2"><tspan class="c1">チ</tspan><tspan class="c2" dy="-3">ル</tspan><tspan class="c3" dy="4">ド</tspan><tspan class="c1" dy="-4">リ</tspan><tspan class="c2" dy="3">ル</tspan></text>
+          </svg><small>いやしの さんすう ドリル</small></h1>
+          <div class="modes" id="modes">
+            <button type="button" id="start" class="big-btn">じぶんレベル<small id="level-sub">はじめは じつりょくチェック</small></button>
+            <button type="button" id="start-review" class="sub-btn" hidden>ふくしゅう <b id="review-count">0</b></button>
+            <div class="grades" role="group" aria-label="学年べつ">
+              <button type="button" data-grade="1">1<small>ねん</small></button><button type="button" data-grade="2">2<small>ねん</small></button><button type="button" data-grade="3">3<small>ねん</small></button>
+              <button type="button" data-grade="4">4<small>ねん</small></button><button type="button" data-grade="5">5<small>ねん</small></button><button type="button" data-grade="6">6<small>ねん</small></button>
+            </div>
+          </div>
+          <div class="room-links">
+            <button type="button" id="open-tree" class="link-btn"><i class="li plant" aria-hidden="true"></i>スキルツリー <b id="tree-badge"></b></button>
+            <button type="button" id="open-trophy" class="link-btn"><i class="li shelf" aria-hidden="true"></i>トロフィー <b id="trophy-badge"></b></button>
+            <button type="button" id="open-collect" class="link-btn"><i class="li radio" aria-hidden="true"></i>コレクション <b id="collect-badge"></b></button>
+          </div>
+        </div>
+        <div class="title-cards">
+          <section class="paper card quest-card" id="quests" aria-labelledby="quest-title">
+            <div class="card-head"><h2 id="quest-title">きょうの クエスト</h2><span class="quest-reward" id="quest-reward"></span></div>
+            <ol class="quest-list" id="quest-list"></ol>
+          </section>
+          <section class="paper card cal-card" id="calendar" aria-labelledby="cal-title">
+            <div class="card-head">
+              <button type="button" class="cal-nav" id="cal-prev" aria-label="前の月">‹</button>
+              <h2 id="cal-title">カレンダー</h2>
+              <button type="button" class="cal-nav" id="cal-next" aria-label="次の月">›</button>
+            </div>
+            <div class="cal-badges" id="cal-badges"></div>
+            <div class="cal-week" aria-hidden="true"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+            <div class="cal-grid" id="cal-grid"></div>
+            <p class="cal-total" id="cal-total"></p>
+          </section>
+        </div>
+      </section>
+
+      <!-- Play: the notebook and the keypad -->
+      <section id="screen-play" class="screen" aria-label="けいさん">
+        <div class="notebook paper" id="notebook">
+          <div class="margin" aria-hidden="true"></div>
+          <div class="page" aria-live="off"></div>
+          <p class="step-label" id="step-label" aria-live="polite">&nbsp;</p>
+          <div class="breath-guide intro" id="breath-guide" hidden aria-hidden="true"><i class="breath-orb"><b id="breath-count"></b></i><span class="breath-text">まずは いっしょに<br>しんこきゅう</span><span class="breath-cue" id="breath-cue"></span></div>
+        </div>
+        <div class="pad" id="pad" role="group" aria-label="すうじの にゅうりょく">
+          <button type="button" data-key="7">7</button><button type="button" data-key="8">8</button><button type="button" data-key="9">9</button>
+          <button type="button" data-key="4">4</button><button type="button" data-key="5">5</button><button type="button" data-key="6">6</button>
+          <button type="button" data-key="1">1</button><button type="button" data-key="2">2</button><button type="button" data-key="3">3</button>
+          <button type="button" data-key="Backspace" class="del" aria-label="1けた けす"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6 H20 V18 H8 L3 12 Z" class="ico-line"/><path d="M11 9.5 L16 14.5 M16 9.5 L11 14.5" class="ico-line"/></svg></button><button type="button" data-key="0" class="zero">0</button>
+        </div>
+      </section>
+
+      <!-- Result: the next page of the notebook -->
+      <section id="screen-result" class="screen" aria-labelledby="result-title">
+        <div class="paper sheet-card result-card">
+          <p class="chip" id="result-title">きょうの ページ</p>
+          <p class="score"><b id="r-score">100</b><span>てん</span></p>
+          <p class="e-break" id="r-break"></p>
+          <dl class="stats" id="r-stats"></dl>
+          <div class="chill-sum" id="r-chill"></div>
+          <div class="extras-row">
+            <div class="timelapse" id="e-lapse"><div class="lapse-room room" id="e-lapse-room" aria-hidden="true"></div><ol class="lapse-note" id="e-lapse-note" aria-label="といた もんだい"></ol><span class="lapse-count" id="e-lapse-count" aria-hidden="true"></span><button type="button" class="mini-btn" id="e-lapse-play">タイムラプス ▶</button></div>
+          </div>
+          <div id="r-growth" class="growth"></div>
+          <div id="r-skills" class="skill-news"></div>
+          <div id="r-quests" class="quest-mini"></div>
+          <div id="r-notes" class="quiet-notes"></div>
+          <div id="e-mood" class="mood" hidden>
+            <p>きょうの でき</p>
+            <div class="mood-row" role="group" aria-label="きょうの でき"></div>
+          </div>
+        </div>
+        <div class="actions" id="r-actions">
+          <button type="button" class="big-btn" id="go-okawari">おかわり<small>カセットを もう 1ぽん。いっかいで せいかいが 8わり いじょうなら つぎの カセットへ（さいだい 5ほん）</small></button>
+          <button type="button" class="big-btn" id="go-again" hidden>もう いちど</button>
+          <button type="button" class="sub-btn" id="go-review" hidden>まちがえた もんだいを ふくしゅう</button>
+          <button type="button" class="sub-btn" id="go-end">きょうは ここまで</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Dialogs (paper cards over the room) -->
+  <div class="dialog" id="dlg" hidden>
+    <div class="dlg-veil" data-close></div>
+    <section class="dlg-card paper" role="dialog" aria-modal="true" aria-labelledby="dlg-title">
+      <header class="dlg-head"><h2 id="dlg-title"></h2><button type="button" class="dlg-x" data-close aria-label="とじる">×</button></header>
+      <div class="dlg-body" id="dlg-body"></div>
+      <footer class="dlg-foot" id="dlg-foot"></footer>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
